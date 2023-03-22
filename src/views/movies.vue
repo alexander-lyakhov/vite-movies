@@ -36,7 +36,7 @@
   padding: .75rem -0.75rem;
   
   .movie {
-    background: $bg-700;
+    background: $bg-500;
     display: flex;
     flex-direction: column;
     padding: .5rem;

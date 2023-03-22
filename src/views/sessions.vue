@@ -55,7 +55,7 @@
   padding: 0.75rem -0.75rem;
   
   .movie {
-    background: $bg-700;
+    background: $bg-800;
     display: flex;
     gap: 1rem;
     position: relative;
