@@ -52,23 +52,23 @@
   display: grid;
   grid-gap: .75rem;
   margin: auto;
-  padding: 0.75rem;	
-
+  padding: 0.75rem -0.75rem;
+  
   .movie {
     background: $bg-700;
-    display: grid;
-    grid-template-columns: 233px 1fr;
-    grid-gap: .75rem;
+    display: flex;
+    gap: 1rem;
     position: relative;
-    padding: .75rem;
-  
+    padding: 1rem;
+
     .poster {
       position: sticky;
       top: 0.75rem;
       align-self: start;
+      width: 233px;
     
       .title {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
         color: $accent-orange;
         text-align: center;
         line-height: 1.25;
@@ -79,45 +79,41 @@
     }
     
     .session-wrapper {
-      background: $bg-700;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: .75rem;
-    
-      h2 {
-        display: none;
-        background: $bg-600;
-        font-size: 1.5rem;
-        text-shadow: 1px 1px 1px #000;
-        grid-column: 1 / -1;
-        padding: .5rem;
-      }
+      width: 100%;
+
       .session {
-        font-size: 1.15rem;
-        text-align: center;
-      
-        &-title  {					
-          color: #fff;
-          background: $bg-800;
-          padding: 1rem .75rem;
+        background: $bg-600;
+        padding: .75rem;
+
+        &:not(:last-child) {
+          margin-bottom: 1.5rem;
         }
-        
+
+        &-title {
+          font-size: 1.25rem;
+          margin: 0 0 .75rem 0;
+        }
+
         &-body {
-          .time {	
-            padding: .75rem .75rem;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+          grid-gap: .5rem;
+
+          .time {
+            background: $bg-800;
+            text-align: center;
+            padding: .5rem 0;
             cursor: pointer;
         
-            &:not(:last-child) {
-              border-bottom: 1px solid $bg-500;
-            }
-            
             &:hover {
-              background: $bg-600;
+              color: #000;
+              background: $bg-100;
             }
           }
         }
       }
-    }
+    }		
+
   }
 }
 </style>

@@ -33,10 +33,10 @@
   grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
   grid-gap: .75rem;
   margin: auto;
-  padding: 0.75rem;
+  padding: .75rem -0.75rem;
   
   .movie {
-    background: $bg-400;
+    background: $bg-700;
     display: flex;
     flex-direction: column;
     padding: .5rem;

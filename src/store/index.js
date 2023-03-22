@@ -33,18 +33,19 @@ export default createStore({
   },
 
   actions: {
-    async fetchMovies({commit}) {
-      const res = await fetch('https://cinema-api-test.y-media.io/v1/movies')
-      const { data } = await res.json()
+    async fetchMovies({state, commit}) {
+      if (!state.movies.length) {
+        const res = await fetch('https://cinema-api-test.y-media.io/v1/movies')
+        const { data } = await res.json()
 
-      commit('SET_MOVIES', data)
+        commit('SET_MOVIES', data)
+      }
     },
 
     async fetchSessions({state, commit, dispatch}) {
       if (!state.movies.length) {
         await dispatch('fetchMovies')
       }
-      
       
       const res = await fetch('https://cinema-api-test.y-media.io/v1/movieShows')
       const { data } = await res.json()

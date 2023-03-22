@@ -1,4 +1,3 @@
-
 <template>
   <header>
     <nav class="nav">
@@ -15,19 +14,23 @@
 </script>
 
 <style lang="scss" scoped>
-.nav {
-  max-width: 1280px;
-  display: flex;
-  gap: 1rem;
-  margin: auto;
-  padding: 1rem 0.75rem;
-  
-  .router-link {
-    font-size: 1.5rem;
-    padding: .5rem 0;
+header {
+  margin-bottom: .75rem;
+
+  .nav {
+    max-width: $page-width;
+    display: flex;
+    gap: 1rem;
+    margin: auto;
+    padding: 1rem 0.75rem;
     
-    &-exact-active {
-      border-bottom: 2px solid $accent-green;
+    .router-link {
+      font-size: 1.5rem;
+      padding: .5rem 0;
+      
+      &-exact-active {
+        border-bottom: 2px solid $accent-green;
+      }
     }
   }
 }
