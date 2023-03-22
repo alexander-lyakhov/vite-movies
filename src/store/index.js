@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import api from '@/api';
 
 export default createStore({
   strict: true,
@@ -35,23 +36,15 @@ export default createStore({
   actions: {
     async fetchMovies({state, commit}) {
       if (!state.movies.length) {
-        const res = await fetch('https://cinema-api-test.y-media.io/v1/movies')
-        const { data } = await res.json()
-
+        const { data } = await api.getMovies()
         commit('SET_MOVIES', data)
       }
     },
 
     async fetchSessions({state, commit, dispatch}) {
-      if (!state.movies.length) {
-        await dispatch('fetchMovies')
-      }
-      
-      const res = await fetch('https://cinema-api-test.y-media.io/v1/movieShows')
-      const { data } = await res.json()
-
+      await dispatch('fetchMovies')
+      const { data } = await api.getSessions()
       commit('SET_SESSIONS', data)
-      
     },
   }
 });

@@ -1,6 +1,5 @@
 ﻿<template>
-  <main class="">
-    <h1>Book tickets</h1>
+  <main class="booking">
   </main>
 </template>
 

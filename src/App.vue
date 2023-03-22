@@ -26,7 +26,7 @@ header {
     
     .router-link {
       font-size: 1.5rem;
-      padding: .5rem 0;
+      padding: .5rem .25rem;
       
       &-exact-active {
         border-bottom: 2px solid $accent-green;
