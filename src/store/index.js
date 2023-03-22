@@ -46,5 +46,10 @@ export default createStore({
       const { data } = await api.getSessions()
       commit('SET_SESSIONS', data)
     },
+
+    async fetchPlaces({state, commit, dispatch}) {
+      const { data } = await api.getPlaces()
+      return data
+    },
   }
 });
