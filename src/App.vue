@@ -18,15 +18,13 @@ header {
   margin-bottom: .75rem;
 
   .nav {
-    max-width: $page-width;
     display: flex;
     gap: 1rem;
-    margin: auto;
-    padding: 1rem 0.75rem;
+    padding: 1rem 0;
     
     .router-link {
       font-size: 1.5rem;
-      padding: .5rem .25rem;
+      padding: .5rem 0;
       
       &-exact-active {
         border-bottom: 2px solid $accent-green;

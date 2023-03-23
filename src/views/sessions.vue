@@ -54,11 +54,9 @@
 
 <style lang="scss" scope>
 .sessions {
-  max-width: $page-width;
   display: grid;
   grid-gap: .75rem;
-  margin: auto;
-  padding: 0.75rem -0.75rem;
+  padding: 0.75rem 0;
   
   .movie {
     background: $bg-800;

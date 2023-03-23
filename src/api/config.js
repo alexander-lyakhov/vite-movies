@@ -4,8 +4,13 @@ axios.defaults.baseURL = 'https://cinema-api-test.y-media.io/v1';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 axios.interceptors.response.use(
-  res => res.data,
-  err => Promise.reject(err)
+  res => {
+    return res.data?.data
+  },
+  err => {
+    console.log('-- AXIOS --', err)
+    return Promise.reject(err)
+  }
 );
 
 export default axios;

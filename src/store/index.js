@@ -21,7 +21,7 @@ export default createStore({
       })
     },
     getMovieById(state) {
-      return (id) => state.movies.find(el => el.id.toString() === id) || {}
+      return (id) => state.movies.find(el => el.id.toString() === id)
     }
   },
 
@@ -39,15 +39,24 @@ export default createStore({
   actions: {
     async fetchMovies({state, commit}) {
       if (!state.movies.length) {
-        const { data } = await api.getMovies()
+        const data = await api.getMovies()
         commit('SET_MOVIES', data)
       }
     },
 
     async fetchSessions({state, commit, dispatch}) {
       await dispatch('fetchMovies')
-      const { data } = await api.getSessions()
+      const data = await api.getSessions()
       commit('SET_SESSIONS', data)
     },
+
+    async getMovieById({state, getters}, id) {
+      let movie = getters.getMovieById(id)
+
+      if (!movie) {
+        movie = await api.getMovieById(id)
+      }
+      return movie
+    }
   }
 });

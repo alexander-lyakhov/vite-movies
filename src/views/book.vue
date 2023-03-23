@@ -1,6 +1,6 @@
 ﻿<template>
   <main class="booking">
-    <h1>{{ movie?.name }}</h1>
+    <h1 v-html="movie?.name"></h1>
     <h2>{{ movie?.name }} - {{ new Date(showdate).toDateString() }} - {{ daytime }}</h2>
     <div
       class="row"
@@ -36,14 +36,17 @@
   const showdate = ref(route.query?.showdate)
   const daytime = ref(route.query?.daytime)
   const places = ref([])
-  const movie = computed(() => store.getters.getMovieById(id))
+  const movie = ref({})
+  // store.dispatch('getMovieById', id).then(res => movie.value = res)
   
   onMounted(async() => {
-    const { data } = await api.getPlaces({id, showdate, daytime})
+    const data = await api.getPlaces(route.query)
+    // const { data } = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
     places.value = data
 
+    movie.value = await store.dispatch('getMovieById', id)
+
     console.log('Places: ', places.value)
-    console.log(route.query)
   })
 
   function getRowNumber(item) {
@@ -58,8 +61,6 @@
 <style lang="scss" scope>
 .booking {
   background: $bg-800;
-  max-width: $page-width;
-  margin: auto;
   padding: .75rem;
 
   h1 {
