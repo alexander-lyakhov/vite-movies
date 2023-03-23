@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('@/views/sessions.vue')
     },
     {
-      path: '/info',
+      path: '/info/:id',
       name: 'info',
       component: () => import('@/views/info.vue')
     },

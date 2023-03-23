@@ -39,13 +39,11 @@
   const daytime = ref(route.query?.daytime)
   const places = ref([])
   const movie = ref({})
-  // store.dispatch('getMovieById', id).then(res => movie.value = res)
   
   onMounted(async() => {
     // places.value = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
     places.value = await api.getPlaces(route.query)
     movie.value = await store.dispatch('getMovieById', movie_id)
-    console.log('Places: ', places.value)
   })
 
   function getRowNumber(item) {
@@ -82,7 +80,7 @@
 
   .movie {
     &-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: $accent-orange;
       text-align: center;
       text-transform: uppercase;

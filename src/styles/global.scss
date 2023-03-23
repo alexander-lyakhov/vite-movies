@@ -1,13 +1,12 @@
 ﻿html,
 body {
-  font-family: 16px verdana;
   color: $text-100;
   background: $bg-900;
   min-height: 100vh;
 }
 
-body {
-  font-size: 16px;
+html {
+  font: 16px verdana;
 }
 
 a {
@@ -18,6 +17,7 @@ a {
 #app {
   max-width: $page-width;
   margin: auto;
+  padding: .75rem;
 }
 
 .noselect {

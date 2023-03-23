@@ -11,7 +11,7 @@
         :src="item.image"
       />
 
-      <div class="title" v-html="item.name" />
+      <div class="title" v-html="item.name" @click="showDetails(item.id)"/>
     </div>
   </main>
 </template>
@@ -19,11 +19,18 @@
 <script setup>
   import { onMounted, computed } from 'vue'
   import { useStore } from 'vuex'
+  import { useRouter } from 'vue-router'
 
-  const store = useStore()
+  const store  = useStore()
+  const router = useRouter()
+  const movies = computed(() => store.state.movies)
   
   onMounted(() => store.dispatch('fetchMovies'))
-  const movies = computed(() => store.state.movies)
+
+  function showDetails(id) {
+    console.log('showDetails', id)
+    router.push({name: 'info', params: {id}})
+  }
 </script>
 
 <style lang="scss" scope>
