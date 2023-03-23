@@ -1,9 +1,13 @@
 ﻿html,
 body {
-  font: 16px verdana;
+  font-family: 16px verdana;
   color: $text-100;
   background: $bg-900;
   min-height: 100vh;
+}
+
+body {
+  font-size: 16px;
 }
 
 a {

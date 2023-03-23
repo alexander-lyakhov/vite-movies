@@ -1,7 +1,8 @@
 ﻿<template>
   <main class="booking">
-    <h1 v-html="movie?.name"></h1>
-    <h2>{{ movie?.name }} - {{ new Date(showdate).toDateString() }} - {{ daytime }}</h2>
+    <div class="movie-title" v-html="movie?.name"></div>
+    <div class="movie-date">{{ new Date(showdate).toDateString() }}</div>
+    <div class="movie-time">{{ daytime }}</div>
     <div
       class="row"
       v-for="(item, iRow) in places"
@@ -15,7 +16,7 @@
           v-for="(el, iSeat) in getSeats(item)"
           :class="[el.is_free ? 'is-free':'is-booked']"
           :key="`${iRow}_${iSeat}`"
-          @click="bookTicket(getRowNumber(item), el.seat)"
+          @click="bookTicket($event, getRowNumber(item), el.seat)"
         >
           {{ el.seat }}
         </li>
@@ -41,10 +42,9 @@
   // store.dispatch('getMovieById', id).then(res => movie.value = res)
   
   onMounted(async() => {
-    places.value = await api.getPlaces(route.query)
     // places.value = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
+    places.value = await api.getPlaces(route.query)
     movie.value = await store.dispatch('getMovieById', movie_id)
-
     console.log('Places: ', places.value)
   })
 
@@ -56,15 +56,22 @@
     return item[1] || []
   }
 
-  function bookTicket(row, seat) {
-    console.log('bookTicket', row, seat)
-    api.bookTicket({
-      movie_id: movie_id,
-      row,
-      seat,
-      showdate: showdate.value,
-      daytime: daytime.value
-    })
+  async function bookTicket(e, row, seat) {
+    try {
+      const res = await api.bookTicket({
+        movie_id,
+        row,
+        seat,
+        showdate: showdate.value,
+        daytime: daytime.value
+      })
+
+      e.target.classList.remove('is-free')
+      e.target.classList.add('is-booked')
+    }
+    catch(e) {
+      console.log(e.statusText)
+    }
   }
 </script>
 
@@ -73,14 +80,27 @@
   background: $bg-800;
   padding: .75rem;
 
-  h1 {
-    font-size: 2rem;
-    font-weight: normal;
-    color: $accent-orange;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 1rem 0;
+  .movie {
+    &-title {
+      font-size: 2rem;
+      color: $accent-orange;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 1rem 0;
+    }
+
+    &-date {
+      font-size: 1.15rem;
+      color: $text-200;
+      text-align: center;
+    }
+
+    &-time {
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 1rem;
+    }
   }
 
   .row {
