@@ -19,6 +19,9 @@ export default createStore({
           sessions: state.sessions[el.id]
         }
       })
+    },
+    getMovieById(state) {
+      return (id) => state.movies.find(el => el.id.toString() === id) || {}
     }
   },
 
@@ -45,11 +48,6 @@ export default createStore({
       await dispatch('fetchMovies')
       const { data } = await api.getSessions()
       commit('SET_SESSIONS', data)
-    },
-
-    async fetchPlaces({state, commit, dispatch}) {
-      const { data } = await api.getPlaces()
-      return data
     },
   }
 });

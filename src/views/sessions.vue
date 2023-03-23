@@ -25,7 +25,7 @@
               class="time"
               v-for="(time, iTime) in session.daytime.split(';')"
               :key="'${movie.id}_${iDate}_${iTime}'"
-              @click="$router.push('/book')"
+              @click="bookTickets(movie.id, session.showdate, time)"
             >
               {{ time }}
             </li>
@@ -38,12 +38,18 @@
 
 <script setup>
   import { onMounted, computed } from 'vue'
+  import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
 
   const store = useStore()
+  const router = useRouter()
 
   onMounted(() => store.dispatch('fetchSessions'))
   const sessions = computed(() => store.getters.sessions)
+
+  function bookTickets(id, showdate, daytime) {
+    router.push({name: 'book', query: {id, showdate, daytime}})
+  }
 </script>
 
 <style lang="scss" scope>

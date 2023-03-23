@@ -24,7 +24,7 @@
   
   onMounted(() => store.dispatch('fetchMovies'))
   const movies = computed(() => store.state.movies)
-/script>
+</script>
 
 <style lang="scss" scope>
 .grid	{

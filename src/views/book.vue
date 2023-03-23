@@ -1,18 +1,20 @@
 ﻿<template>
   <main class="booking">
+    <h1>{{ movie?.name }}</h1>
+    <h2>{{ movie?.name }} - {{ new Date(date).toDateString() }} - {{ time }}</h2>
     <div
       class="row"
-      v-for="item in places"
-      :key="item[0].row"
+      v-for="(item, iRow) in places"
+      :key="iRow"
     >
-      <div class="row-title">Row {{ item[0].row }}</div>
+      <div class="row-title">Row {{ getRowNumber(item) }}</div>
 
       <ul class="row-body">
         <li
           class="seat"
-          v-for="(el, index) in item[1]"
+          v-for="(el, iSeat) in getSeats(item)"
           :class="[el.is_free ? 'is-free':'is-booked']"
-          :key="index"
+          :key="`${iRow}_${iSeat}`"
         >
           {{ el.seat }}
         </li>
@@ -24,20 +26,35 @@
 <script setup>
   import { onMounted, computed, ref } from 'vue'
   import { useStore } from 'vuex'
+  import { useRoute } from 'vue-router'
+  import api from '@/api'
 
   const store = useStore()
+  const route = useRoute()
+
+  const date = ref('')
+  const time = ref('')
   const places = ref([])
+  const movie = computed(() => store.getters.getMovieById(route.query?.id))
   
   onMounted(async() => {
-    places.value = await store.dispatch('fetchPlaces')
+    date.value = route.query?.showdate
+    time.value = route.query?.daytime
+
+    const { data } = await api.getPlaces()
+    places.value = data
+
     console.log('Places: ', places.value)
+    console.log(route.query)
   })
 
-  /*
-  const getClasses = (el) => ({
-    el.is_free ? 'is-free':'is-booked'
-  })
-  */
+  function getRowNumber(item) {
+    return item[0]?.row || ''
+  }
+
+  function getSeats(item) {
+    return item[1] || []
+  }
 </script>
 
 <style lang="scss" scope>
@@ -46,6 +63,16 @@
   max-width: $page-width;
   margin: auto;
   padding: .75rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: normal;
+    color: $accent-orange;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 1rem 0;
+  }
 
   .row {
     background: $bg-600;
@@ -81,13 +108,6 @@
           color: #000;
           background: $red-300;
         }
-
-        /*
-        &:hover {
-          color: #000;
-          background: $bg-100;
-        }
-        */
       }
     }
   }
