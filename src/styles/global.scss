@@ -3,6 +3,8 @@ body {
   color: $text-100;
   background: $bg-900;
   min-height: 100vh;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 html {

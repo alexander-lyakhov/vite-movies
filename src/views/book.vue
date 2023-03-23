@@ -110,7 +110,7 @@
     }
 
     &-title {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       text-shadow: 1px 1px 1px #000000;
       margin: 0 0 .75rem 0;
     }

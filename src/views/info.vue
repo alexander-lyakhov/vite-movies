@@ -1,5 +1,5 @@
 ﻿<template>
-  <main>
+  <main class="movie-info">
     <poster
       class="poster"
       :image="movie.image"
@@ -38,12 +38,13 @@
   console.log(genres)
 
   onMounted(async() => {
+    window.scrollTo(0, 0)
     movie.value = await store.dispatch('getMovieById', id)
   })
 </script>
 
 <style lang="scss" scope>
-main {
+.movie-info {
   background: $bg-800;
   display: grid;
   grid-template-columns: 233px 1fr;

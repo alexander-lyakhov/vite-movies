@@ -33,7 +33,6 @@
     text-shadow: 1px 1px 1px #000;
     letter-spacing: 1px;
     padding: .5rem 0;
-    cursor: default;
   }
 }
 </style>

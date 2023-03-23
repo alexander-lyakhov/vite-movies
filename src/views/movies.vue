@@ -11,7 +11,7 @@
         :src="item.image"
       />
 
-      <div class="title" v-html="item.name" @click="showDetails(item.id)"/>
+      <div class="title" v-html="item.name" @click="showMovieInfo(item.id)"/>
     </div>
   </main>
 </template>
@@ -27,7 +27,7 @@
   
   onMounted(() => store.dispatch('fetchMovies'))
 
-  function showDetails(id) {
+  function showMovieInfo(id) {
     console.log('showDetails', id)
     router.push({name: 'info', params: {id}})
   }

@@ -23,7 +23,8 @@ header {
     padding: 1rem 0;
     
     .router-link {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
+      border-bottom: 2px solid transparent;
       padding: .5rem 0;
       
       &-exact-active {

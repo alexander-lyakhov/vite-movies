@@ -5,10 +5,11 @@
       v-for="movie in sessions"
       :key="movie.id"
     >
-      <div class="poster">
-        <img :src="movie.image" width="233" />
-        <div class="title" v-html="movie.name"></div>
-      </div>
+      <poster
+        :image="movie.image"
+        :title="movie.name"
+        @click="showMovieInfo(movie.id)"
+      />
 
       <div class="session-wrapper">
         <div
@@ -40,12 +41,17 @@
   import { onMounted, computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
+  import poster from '@/components/poster.vue'
 
   const store = useStore()
   const router = useRouter()
 
   onMounted(() => store.dispatch('fetchSessions'))
   const sessions = computed(() => store.getters.sessions)
+
+  function showMovieInfo(id) {
+    router.push({name: 'info', params: {id}})
+  }
 
   function bookTickets(id, showdate, daytime) {
     router.push({name: 'book', query: {id, showdate, daytime}})
@@ -56,30 +62,18 @@
 .sessions {
   display: grid;
   grid-gap: .75rem;
-  padding: 0.75rem 0;
   
   .movie {
     background: $bg-800;
     display: flex;
     gap: 1rem;
     position: relative;
-    padding: 1rem;
+    padding: .75rem;
 
     .poster {
       position: sticky;
-      top: 0.75rem;
-      align-self: start;
-      width: 233px;
-    
-      .title {
-        font-size: 1.25rem;
-        color: $accent-orange;
-        text-align: center;
-        line-height: 1.25;
-        text-shadow: 1px 1px 1px #000;
-        letter-spacing: 1px;
-        padding: .5rem 0;
-      }
+      top: .75rem;
+      cursor: pointer;
     }
     
     .session-wrapper {
