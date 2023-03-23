@@ -8,7 +8,7 @@
     <div class="info">
       <dd>
         <dt>Genre:</dt>
-        <dl>Comedy</dl>
+        <dl>{{ genres[movie.genre]}}</dl>
       </dd>
       <dd>
         <dt>Description:</dt>
@@ -23,16 +23,19 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, computed } from 'vue'
   import { useStore } from 'vuex'
   import { useRoute } from 'vue-router'
   import poster from '@/components/poster.vue'
+  import { genres } from '@/utils/config.js'
 
   const store = useStore()
   const route = useRoute()
 
   const id = route.params?.id
   const movie = ref({})
+
+  console.log(genres)
 
   onMounted(async() => {
     movie.value = await store.dispatch('getMovieById', id)
