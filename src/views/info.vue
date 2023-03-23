@@ -100,4 +100,32 @@
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .movie-info {
+    .info {
+      dd {
+        grid-template-columns: 1fr;
+
+        dt {
+          text-align: left;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .movie-info {
+    .info {
+      dd li {
+        flex-direction: column;
+
+        .key {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
 </style>
