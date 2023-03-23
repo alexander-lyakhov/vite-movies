@@ -22,9 +22,14 @@ async function getPlaces({id, daytime, showdate}) {
   return axios.get(`/showPlaces?movie_id=${id}&daytime=${daytime}&showdate=${showdate}`)
 }
 
+async function bookTicket(data) {
+  return axios.post('/bookPlace', data)
+}
+
 export default {
   getMovies,
   getMovieById,
   getSessions,
-  getPlaces
+  getPlaces,
+  bookTicket
 }

@@ -15,6 +15,7 @@
           v-for="(el, iSeat) in getSeats(item)"
           :class="[el.is_free ? 'is-free':'is-booked']"
           :key="`${iRow}_${iSeat}`"
+          @click="bookTicket(getRowNumber(item), el.seat)"
         >
           {{ el.seat }}
         </li>
@@ -32,7 +33,7 @@
   const store = useStore()
   const route = useRoute()
 
-  const id = route.query?.id
+  const movie_id = route.query?.id
   const showdate = ref(route.query?.showdate)
   const daytime = ref(route.query?.daytime)
   const places = ref([])
@@ -40,11 +41,9 @@
   // store.dispatch('getMovieById', id).then(res => movie.value = res)
   
   onMounted(async() => {
-    const data = await api.getPlaces(route.query)
-    // const { data } = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
-    places.value = data
-
-    movie.value = await store.dispatch('getMovieById', id)
+    places.value = await api.getPlaces(route.query)
+    // places.value = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
+    movie.value = await store.dispatch('getMovieById', movie_id)
 
     console.log('Places: ', places.value)
   })
@@ -55,6 +54,17 @@
 
   function getSeats(item) {
     return item[1] || []
+  }
+
+  function bookTicket(row, seat) {
+    console.log('bookTicket', row, seat)
+    api.bookTicket({
+      movie_id: movie_id,
+      row,
+      seat,
+      showdate: showdate.value,
+      daytime: daytime.value
+    })
   }
 </script>
 
@@ -97,6 +107,10 @@
         text-align: center;
         padding: .5rem 0;
         cursor: pointer;
+
+        &:hover {
+          outline: 2px solid #fff;
+        }
 
         &.is-free {
           color: #000;
