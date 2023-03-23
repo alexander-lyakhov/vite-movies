@@ -1,7 +1,7 @@
 ﻿<template>
   <main class="booking">
     <h1>{{ movie?.name }}</h1>
-    <h2>{{ movie?.name }} - {{ new Date(date).toDateString() }} - {{ time }}</h2>
+    <h2>{{ movie?.name }} - {{ new Date(showdate).toDateString() }} - {{ daytime }}</h2>
     <div
       class="row"
       v-for="(item, iRow) in places"
@@ -32,16 +32,14 @@
   const store = useStore()
   const route = useRoute()
 
-  const date = ref('')
-  const time = ref('')
+  const id = route.query?.id
+  const showdate = ref(route.query?.showdate)
+  const daytime = ref(route.query?.daytime)
   const places = ref([])
-  const movie = computed(() => store.getters.getMovieById(route.query?.id))
+  const movie = computed(() => store.getters.getMovieById(id))
   
   onMounted(async() => {
-    date.value = route.query?.showdate
-    time.value = route.query?.daytime
-
-    const { data } = await api.getPlaces()
+    const { data } = await api.getPlaces({id, showdate, daytime})
     places.value = data
 
     console.log('Places: ', places.value)
