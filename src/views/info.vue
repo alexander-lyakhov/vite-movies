@@ -102,14 +102,12 @@
 }
 @media screen and (max-width: 768px) {
   .movie-info {
-    .info {
-      dd {
-        grid-template-columns: 1fr;
+    .info dd {
+      grid-template-columns: 1fr;
 
-        dt {
-          text-align: left;
-          padding: 0;
-        }
+      dt {
+        text-align: left;
+        padding: 0;
       }
     }
   }
@@ -117,15 +115,25 @@
 
 @media screen and (max-width: 640px) {
   .movie-info {
-    .info {
-      dd li {
-        flex-direction: column;
+    .info dd li {
+      flex-direction: column;
 
-        .key {
-          font-weight: bold;
-        }
+      .key {
+        font-weight: bold;
       }
     }
   }
 }
+
+@media screen and (max-width: 512px) {
+  .movie-info {
+    grid-template-columns: 1fr;
+
+    .poster {
+      position: relative;
+    }
+  }
+}
+
+
 </style>

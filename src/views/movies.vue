@@ -5,13 +5,11 @@
       v-for="item in movies"
       :key="item.id"
     >
-      <img
-        width="233"
-        height="240"
-        :src="item.image"
+      <poster
+        :image="item.image"
+        :title="item.name"
+        @click="showMovieInfo(item.id)"
       />
-
-      <div class="title" v-html="item.name" @click="showMovieInfo(item.id)"/>
     </div>
   </main>
 </template>
@@ -20,6 +18,7 @@
   import { onMounted, computed } from 'vue'
   import { useStore } from 'vuex'
   import { useRouter } from 'vue-router'
+  import poster from '@/components/poster.vue'
 
   const store  = useStore()
   const router = useRouter()
@@ -28,7 +27,6 @@
   onMounted(() => store.dispatch('fetchMovies'))
 
   function showMovieInfo(id) {
-    console.log('showDetails', id)
     router.push({name: 'info', params: {id}})
   }
 </script>
@@ -41,30 +39,20 @@
   padding: .75rem 0;
   
   .movie {
-    background: $bg-500;
-    display: flex;
-    flex-direction: column;
+    background: $bg-800;
     padding: .5rem;
-    cursor: pointer;
-  
-    img {
+
+    .poster {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-    
-    .title {
-      font-size: 1.15rem;
-      background: $bg-800;
-      min-height: 64px;
-      display: flex;
-      text-align: center;
-      justify-content: center;
-      align-items: center;
-      padding: 0 .5rem;
+      cursor: pointer;
 
-      &:hover {
-        color: #fff;
+      .title {
+        font-size: 1.15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem 0 0;
       }
     }
   }

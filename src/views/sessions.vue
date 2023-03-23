@@ -65,8 +65,9 @@
   
   .movie {
     background: $bg-800;
-    display: flex;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 233px 1fr;
+    grid-gap: .75rem;
     position: relative;
     padding: .75rem;
 
