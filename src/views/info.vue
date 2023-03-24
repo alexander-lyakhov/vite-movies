@@ -1,14 +1,14 @@
 ﻿<template>
-  <section class="movie-info">
+  <section class="info">
     <poster
       class="poster"
       :image="movie.image"
       :title="movie.name"
     />
-    <div class="info">
+    <div class="movie-info">
       <dd>
         <dt>Genre:</dt>
-        <dl>{{ genres[movie.genre]}}</dl>
+        <dl>{{ genre }}</dl>
       </dd>
       <dd>
         <dt>Description:</dt>
@@ -34,17 +34,17 @@
 
   const id = route.params?.id
   const movie = ref({})
-
-  console.log(genres)
+  const genre = ref(null)
 
   onMounted(async() => {
     window.scrollTo(0, 0)
     movie.value = await store.dispatch('getMovieById', id)
+    genre.value = genres.find(el => el.key == movie.value.genre)?.value
   })
 </script>
 
 <style lang="scss" scope>
-.movie-info {
+.info {
   @extend .grid-container;
   background: $bg-800;
   grid-template-columns: 233px 1fr;
@@ -55,7 +55,7 @@
     top: .75rem;
   }
 
-  .info {
+  .movie-info {
     width: 100%;
 
     dd {
