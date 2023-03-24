@@ -1,5 +1,5 @@
 ﻿<template>
-  <main class="booking">
+  <section class="booking">
     <div class="movie-title" v-html="movie?.name"></div>
     <div class="movie-date">{{ new Date(showdate).toDateString() }}</div>
     <div class="movie-time">{{ daytime }}</div>
@@ -22,7 +22,7 @@
         </li>
       </ul>
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>

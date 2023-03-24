@@ -10,7 +10,8 @@
 </template>
 
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterLink, RouterView, useRouter } from 'vue-router'
+  const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

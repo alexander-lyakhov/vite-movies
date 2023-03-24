@@ -1,5 +1,5 @@
 ﻿<template>
-  <main class="grid">
+  <section class="movies">
     <div
       class="movie"
       v-for="item in movies"
@@ -11,7 +11,7 @@
         @click="showMovieInfo(item.id)"
       />
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>
@@ -32,11 +32,9 @@
 </script>
 
 <style lang="scss" scope>
-.grid	{
-  display: grid;
+.movies	{
+  @extend .grid-container;
   grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
-  grid-gap: .75rem;
-  padding: .75rem 0;
   
   .movie {
     background: $bg-800;

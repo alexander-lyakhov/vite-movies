@@ -1,5 +1,5 @@
 ﻿<template>
-  <main class="sessions">
+  <section class="sessions">
     <div
       class="movie"
       v-for="movie in sessions"
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>
@@ -60,15 +60,10 @@
 
 <style lang="scss" scope>
 .sessions {
-  display: grid;
-  grid-gap: .75rem;
-  
   .movie {
+    @extend .grid-container;
     background: $bg-800;
-    display: grid;
     grid-template-columns: 233px 1fr;
-    grid-gap: .75rem;
-    position: relative;
     padding: .75rem;
 
     .poster {
@@ -112,7 +107,7 @@
           }
         }
       }
-    }		
+    }
 
   }
 }

@@ -1,5 +1,5 @@
 ﻿<template>
-  <main class="movie-info">
+  <section class="movie-info">
     <poster
       class="poster"
       :image="movie.image"
@@ -19,7 +19,7 @@
         <dl v-html="movie.additional" />
       </dd>
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>
@@ -45,10 +45,9 @@
 
 <style lang="scss" scope>
 .movie-info {
+  @extend .grid-container;
   background: $bg-800;
-  display: grid;
   grid-template-columns: 233px 1fr;
-  grid-gap: .75rem;
   padding: .75rem;
 
   .poster {
