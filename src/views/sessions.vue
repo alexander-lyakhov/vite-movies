@@ -12,6 +12,23 @@
       />
 
       <div class="session-wrapper">
+        <row-container
+          v-for="(session, iDate) in movie.sessions"
+          :key="'${movie.id}_${iDate}'"
+          :title="new Date(session.showdate).toDateString()"
+        >
+          <div
+            class="time"
+            v-for="(time, iTime) in session.daytime.split(';')"
+            :key="'${movie.id}_${iDate}_${iTime}'"
+            @click="bookTickets(movie.id, session.showdate, time)"
+          >
+            {{ time }}
+          </div>
+        </row-container>
+      </div>
+      <!--
+      <div class="session-wrapper">
         <div
           class="session"
           v-for="(session, iDate) in movie.sessions"
@@ -33,6 +50,7 @@
           </ul>
         </div>
       </div>
+      -->
     </div>
   </section>
 </template>
@@ -42,6 +60,7 @@
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
   import poster from '@/components/poster.vue'
+  import rowContainer from '@/components/row-container.vue'
 
   const store = useStore()
   const router = useRouter()
@@ -75,6 +94,7 @@
     .session-wrapper {
       width: 100%;
 
+      /*
       .session {
         background: $bg-600;
         padding: .75rem;
@@ -104,6 +124,21 @@
               color: #000;
               background: $bg-100;
             }
+          }
+        }
+      }*/
+      .row-body {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+
+        .time {
+          background: $bg-800;
+          text-align: center;
+          padding: .5rem 0;
+          cursor: pointer;
+          
+          &:hover {
+            color: #000;
+            background: $bg-100;
           }
         }
       }
