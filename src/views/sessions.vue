@@ -16,47 +16,23 @@
           v-for="(session, iDate) in movie.sessions"
           :key="'${movie.id}_${iDate}'"
           :title="new Date(session.showdate).toDateString()"
+          :items="session.daytime.split(';')"
+          v-slot="{item: time}"
         >
           <div
             class="time"
-            v-for="(time, iTime) in session.daytime.split(';')"
-            :key="'${movie.id}_${iDate}_${iTime}'"
             @click="bookTickets(movie.id, session.showdate, time)"
           >
             {{ time }}
           </div>
         </row-container>
       </div>
-      <!--
-      <div class="session-wrapper">
-        <div
-          class="session"
-          v-for="(session, iDate) in movie.sessions"
-          :key="'${movie.id}_${iDate}'"
-        >
-          <div class="session-title">
-            {{ new Date(session.showdate).toDateString() }}
-          </div>
-        
-          <ul class="session-body">
-            <li
-              class="time"
-              v-for="(time, iTime) in session.daytime.split(';')"
-              :key="'${movie.id}_${iDate}_${iTime}'"
-              @click="bookTickets(movie.id, session.showdate, time)"
-            >
-              {{ time }}
-            </li>
-          </ul>
-        </div>
-      </div>
-      -->
     </div>
   </section>
 </template>
 
 <script setup>
-  import { onMounted, computed } from 'vue'
+  import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
   import poster from '@/components/poster.vue'
@@ -65,7 +41,7 @@
   const store = useStore()
   const router = useRouter()
 
-  onMounted(() => store.dispatch('fetchSessions'))
+  store.dispatch('fetchSessions')
   const sessions = computed(() => store.getters.sessions)
 
   function showMovieInfo(id) {
@@ -79,6 +55,8 @@
 
 <style lang="scss" scope>
 .sessions {
+  @extend .grid-container;
+
   .movie {
     @extend .grid-container;
     background: $bg-800;
@@ -92,54 +70,15 @@
     }
     
     .session-wrapper {
-      width: 100%;
-
-      /*
-      .session {
-        background: $bg-600;
-        padding: .75rem;
-
-        &:not(:last-child) {
-          margin-bottom: 1.5rem;
-        }
-
-        &-title {
-          font-size: 1.25rem;
-          text-shadow: 1px 1px 1px #000000;
-          margin: 0 0 .75rem 0;
-        }
-
-        &-body {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-          grid-gap: .5rem;
-
-          .time {
-            background: $bg-800;
-            text-align: center;
-            padding: .5rem 0;
-            cursor: pointer;
+      .time {
+        background: $bg-800;
+        text-align: center;
+        padding: .5rem 0;
+        cursor: pointer;
         
-            &:hover {
-              color: #000;
-              background: $bg-100;
-            }
-          }
-        }
-      }*/
-      .row-body {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-
-        .time {
-          background: $bg-800;
-          text-align: center;
-          padding: .5rem 0;
-          cursor: pointer;
-          
-          &:hover {
-            color: #000;
-            background: $bg-100;
-          }
+        &:hover {
+          color: #000;
+          background: $bg-100;
         }
       }
     }

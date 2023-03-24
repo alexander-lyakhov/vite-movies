@@ -1,24 +1,36 @@
 ﻿<template>
   <div class="row">
-    <div class="row">
-      <div class="row-title">{{ title }}</div>
-    
-      <div class="row-body">
-        <slot></slot>
-      </div>
+    <div class="row-title">{{ title }}</div>
+  
+    <div class="row-body" :style="styleObject">
+      <template v-for="(item, index) in items" :key="index">
+        <slot v-bind="{item}"></slot>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, reactive } from 'vue'
+  import { ref, reactive, computed } from 'vue'
 
   const props = defineProps({
     title: {
       type: String,
       default: 'Row title'
+    },
+    itemWidth: {
+      type: Number,
+      default: 80
+    },
+    items: {
+      type: Array,
+      default: () => ([])
     }
   })
+
+  const styleObject = {
+    'grid-template-columns': `repeat(auto-fit, minmax(${props.itemWidth}px, 1fr))`
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +50,6 @@
 
   &-body {
     display: grid;
-    //grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     grid-gap: .5rem;
   }
 }

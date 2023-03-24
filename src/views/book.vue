@@ -3,25 +3,23 @@
     <div class="movie-title" v-html="movie?.name"></div>
     <div class="movie-date">{{ new Date(showdate).toDateString() }}</div>
     <div class="movie-time">{{ daytime }}</div>
-    <div
-      class="row"
-      v-for="(item, iRow) in places"
-      :key="iRow"
-    >
-      <div class="row-title">Row {{ getRowNumber(item) }}</div>
 
-      <ul class="row-body">
-        <li
-          class="seat"
-          v-for="(el, iSeat) in getSeats(item)"
-          :class="[el.is_free ? 'is-free':'is-booked']"
-          :key="`${iRow}_${iSeat}`"
-          @click="bookTicket($event, getRowNumber(item), el.seat)"
-        >
-          {{ el.seat }}
-        </li>
-      </ul>
-    </div>
+    <row-container
+      v-for="(item, iDate) in places"
+      :key="'${movie.id}_${iDate}'"
+      :title="`Row ${getRowNumber(item)}`"
+      :items="getSeats(item)"
+      :item-width="32"
+      v-slot="{item: el}"
+    >
+      <div
+        class="seat"
+        :class="[el.is_free ? 'is-free':'is-booked']"
+        @click="bookTicket($event, getRowNumber(item), el.seat)"
+      >
+        {{ el.seat }}
+      </div>
+    </row-container>
   </section>
 </template>
 
@@ -29,6 +27,7 @@
   import { onMounted, computed, ref } from 'vue'
   import { useStore } from 'vuex'
   import { useRoute } from 'vue-router'
+  import rowContainer from '@/components/row-container.vue'
   import api from '@/api'
 
   const store = useStore()
@@ -99,47 +98,26 @@
       text-align: center;
       padding: 1rem;
     }
+  
   }
 
-  .row {
-    background: $bg-600;
-    padding: .75rem;
+  .seat {
+    color: #000;
+    background: $bg-800;
+    text-align: center;
+    padding: .5rem 0;
+    cursor: pointer;
 
-    &:not(:last-child) {
-      margin-bottom: 1.5rem;
+    &:hover {
+      outline: 2px solid #fff;
     }
 
-    &-title {
-      font-size: 1.25rem;
-      text-shadow: 1px 1px 1px #000000;
-      margin: 0 0 .75rem 0;
+    &.is-free {
+      background: $green-300;
     }
 
-    &-body {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
-      grid-gap: .25rem;
-
-      .seat {
-        background: $bg-800;
-        text-align: center;
-        padding: .5rem 0;
-        cursor: pointer;
-
-        &:hover {
-          outline: 2px solid #fff;
-        }
-
-        &.is-free {
-          color: #000;
-          background: $green-300;
-        }
-    
-        &.is-booked {
-          color: #000;
-          background: $red-300;
-        }
-      }
+    &.is-booked {
+      background: $red-300;
     }
   }
 }
