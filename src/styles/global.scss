@@ -16,10 +16,20 @@ a {
   text-decoration: none;
 }
 
+.btn-icon {
+  width: 32px;
+  height: 32px;
+
+  svg {
+    color: $text-100;
+  }
+}
+
 #app {
   max-width: $page-width;
   margin: auto;
   padding: .75rem;
+  position: relative;
 }
 
 .noselect {
