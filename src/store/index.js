@@ -38,10 +38,10 @@ export default createStore({
 
   actions: {
     async fetchMovies({state, commit}) {
-      // if (!state.movies.length) {
+      if (!state.movies.length) {
         const data = await api.getMovies()
         commit('SET_MOVIES', data)
-      // }
+      }
     },
 
     async searchMovies({state, commit}, search) {
