@@ -46,7 +46,7 @@
   function reset() {
     search.name = ''
     search.genre = null
-    store.dispatch('fetchMovies', {force: true})
+    store.dispatch('fetchMovies')
   }
 
   function confirmSearch() {

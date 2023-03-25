@@ -7,10 +7,15 @@ export default createStore({
   state: () => ({
     movies: [],
     filteredMovis: [],
-    sessions: []
+    sessions: [],
+    src: 'movies'
   }),
 
   getters: {
+    movies(state) {
+      return state[state.src]
+    },
+
     sessions(state) {
       return state.movies.map(el => {
         return {
@@ -21,16 +26,27 @@ export default createStore({
         }
       })
     },
+
     getMovieById(state) {
       return (id) => state.movies.find(el => el.id.toString() === id)
     }
   },
 
   mutations: {
+    SET_SRC(state, src) {
+      state.src = src
+    },
+
     SET_MOVIES(state, data) {
       console.log('SET_MOVIES', data)
       state.movies = data
     },
+
+    SET_FILTERED_MOVIES(state, data) {
+      console.log('SET_FILTERED_MOVIES', data)
+      state.filteredMovis = data
+    },
+
 
     SET_SESSIONS(state, data) {
       console.log('SET_SESSIONS', data)
@@ -39,17 +55,20 @@ export default createStore({
   },
 
   actions: {
-    async fetchMovies({state, commit}, config) {
-      if (!state.movies.length || config?.force) {
+    async fetchMovies({state, commit}) {
+      commit('SET_SRC', 'movies')
+
+      if (!state.movies.length) {
         const data = await api.getMovies()
         commit('SET_MOVIES', data)
       }
     },
 
     async searchMovies({state, commit}, search) {
-      console.log('-- searchMovies', search)
       const data = await api.searchMovies(search.name, search.genre)
-      commit('SET_MOVIES', data)
+      
+      commit('SET_SRC', 'filteredMovis')
+      commit('SET_FILTERED_MOVIES', data)
     },
 
     async fetchSessions({state, commit, dispatch}) {

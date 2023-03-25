@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="text-field">
+  <div class="text-field" :class="classObject">
     <input
       type="text"
       :value="modelValue" 
@@ -9,6 +9,8 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue'
+
   const props = defineProps({
     modelValue: {
       type: String,
@@ -19,6 +21,10 @@
   const emit = defineEmits([
     'update:modelValue'
   ])
+
+  const classObject = computed(() => ({
+    'not-empty': !!props.modelValue
+  }))
 
   function onInput(e) {
     emit('update:modelValue', e.target.value)
@@ -32,6 +38,10 @@
   display: flex;
   height: 3rem;
   padding: 0 .5rem;
+
+  &.not-empty {
+    border: 1px solid $accent-orange;
+  }
 
   input[type="text"] {
     font-size: 1.5rem;

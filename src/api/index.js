@@ -5,7 +5,7 @@ async function getMovies() {
 }
 
 async function searchMovies(name, genre) {
-  return axios.get(`/movies?name=${name}&genres=${genre}`)
+  return axios.get(`/movies?name=${name}&genres=${genre || ''}`)
 }
 
 async function getMovieById(id) {

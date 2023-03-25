@@ -2,8 +2,8 @@
   <div class="dropdown noselect">
     <div
       class="dropdown-title"
-      :class="{'is-open':
-      isOpen}" @click.stop="toggle"
+      :class="titleClassObject"
+      @click.stop="toggle"
     >
       <span v-if="!selectedItem" class="placeholder">
         choose genre
@@ -48,6 +48,10 @@
 
   const isOpen = ref(false)
   const selectedItem = computed(() => props.modelValue)
+  const titleClassObject = computed(() => ({
+    'is-open': isOpen.value,
+    'is-selected': selectedItem.value
+  }))
 
   function toggle() {
     isOpen.value = !isOpen.value
@@ -93,6 +97,10 @@
       &:after {
         transform: rotate(-135deg) translateY(-4px);
       }
+    }
+
+    &.is-selected:not(.is-open) {
+      border: 1px solid $accent-orange;
     }
 
     .placeholder {

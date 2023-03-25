@@ -25,7 +25,7 @@
 
   const store  = useStore()
   const router = useRouter()
-  const movies = computed(() => store.state.movies)
+  const movies = computed(() => store.getters.movies)
   
   onMounted(() => store.dispatch('fetchMovies'))
 
