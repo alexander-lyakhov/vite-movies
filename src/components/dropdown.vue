@@ -107,7 +107,7 @@
     position: absolute;
     left: 0;
     top: 100%;
-    padding: 2px;
+    padding: 4px;
 
     li {
       background: $bg-800;
@@ -115,7 +115,7 @@
       cursor: pointer;
       
       &:not(:last-child) {
-        margin: 0 0 2px;
+        margin: 0 0 1px;
       }
 
       &:hover {

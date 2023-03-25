@@ -1,19 +1,29 @@
 ﻿<template>
   <section class="search">
     <textfield v-model="search.name" />
+    
     <dropdown :items="genres" v-model="search.genre" />
 
-    <a class="btn btn-icon" href="#" @click.stop="reset">
+    <a class="btn btn-icon"
+      :class="iconClassObj"
+      href="#"
+      @click.stop="reset"
+    >
       <IconReset />
     </a>
-    <a class="btn btn-icon" href="#" @click="confirmSearch">
+    <a
+      class="btn btn-icon"
+      :class="iconClassObj"
+      href="#"
+      @click="confirmSearch"
+    >
       <IconConvirm />
     </a>
   </section>
 </template>
 
 <script setup>
-  import { reactive } from 'vue'
+  import { reactive, computed } from 'vue'
   import { useStore } from 'vuex'
   import textfield from '@/components/textfield.vue'
   import dropdown from '@/components/dropdown.vue'
@@ -28,10 +38,15 @@
     genre: null
   })
 
+  const isIconsDisabled = computed(() => !search.name && !search.genre)
+  const iconClassObj = computed(() => ({
+    'is-disabled': isIconsDisabled.value
+  }))
+
   function reset() {
     search.name = ''
     search.genre = null
-    store.dispatch('fetchMovies')
+    store.dispatch('fetchMovies', {force: true})
   }
 
   function confirmSearch() {

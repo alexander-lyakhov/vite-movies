@@ -6,6 +6,7 @@ export default createStore({
 
   state: () => ({
     movies: [],
+    filteredMovis: [],
     sessions: []
   }),
 
@@ -30,6 +31,7 @@ export default createStore({
       console.log('SET_MOVIES', data)
       state.movies = data
     },
+
     SET_SESSIONS(state, data) {
       console.log('SET_SESSIONS', data)
       state.sessions = data
@@ -37,8 +39,8 @@ export default createStore({
   },
 
   actions: {
-    async fetchMovies({state, commit}) {
-      if (!state.movies.length) {
+    async fetchMovies({state, commit}, config) {
+      if (!state.movies.length || config?.force) {
         const data = await api.getMovies()
         commit('SET_MOVIES', data)
       }
