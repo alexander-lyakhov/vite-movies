@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-  import { ref, computed, watch, watchEffect } from 'vue'
+  import { ref, computed, watch } from 'vue'
 
   const props = defineProps({
     items: {
@@ -47,24 +47,16 @@
   ])
 
   const isOpen = ref(false)
-  const selectedItem = ref(null)
-
-  watch(
-    () => props.modelValue,
-    val => selectedItem.value = val, 
-    { immediate: true }
-  )
+  const selectedItem = computed(() => props.modelValue)
 
   function toggle() {
     isOpen.value = !isOpen.value
   }
 
   function select(item) {
-    selectedItem.value = item
     isOpen.value = false;
-    emit('update:modelValue', selectedItem.value)
+    emit('update:modelValue', item)
   }
-  
 </script>
 
 <style lang="scss" scoped>

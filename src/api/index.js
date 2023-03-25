@@ -4,6 +4,10 @@ async function getMovies() {
   return axios.get('/movies')
 }
 
+async function searchMovies(name, genre) {
+  return axios.get(`/movies?name=${name}&genres=${genre}`)
+}
+
 async function getMovieById(id) {
   try {
     const data = await axios.get(`/movies?movie_id=${id}`)
@@ -28,6 +32,7 @@ async function bookTicket(data) {
 
 export default {
   getMovies,
+  searchMovies,
   getMovieById,
   getSessions,
   getPlaces,
