@@ -43,7 +43,10 @@
   })
 
   const emit = defineEmits([
-    'update:modelValue'
+    'update:modelValue',
+    'expand',
+    'collapse',
+    'toggle'
   ])
 
   const isOpen = ref(false)
@@ -55,11 +58,13 @@
 
   function toggle() {
     isOpen.value = !isOpen.value
+    emit('toggle', isOpen.value)
   }
 
   function select(item) {
     isOpen.value = false;
     emit('update:modelValue', item)
+    emit('toggle', isOpen.value)
   }
 </script>
 

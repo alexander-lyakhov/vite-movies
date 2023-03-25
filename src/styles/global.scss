@@ -17,11 +17,18 @@ a {
 }
 
 .btn-icon {
-  width: 32px;
-  height: 32px;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  transition: background .1s;
+  padding: .125rem;
 
   svg {
     color: $text-100;
+  }
+
+  &:hover {
+    background: $bg-600;
   }
 
   &.is-disabled {

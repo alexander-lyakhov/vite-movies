@@ -1,8 +1,17 @@
 ﻿<template>
+  <div
+    class="overlay"
+    v-show="isOverlayVisible"
+  />
+
   <section class="search">
-    <textfield v-model="search.name" />
+    <textfield v-model.trim="search.name" />
     
-    <dropdown :items="genres" v-model="search.genre" />
+    <dropdown
+      :items="genres"
+      v-model="search.genre"
+      @toggle="toggleOverlay"
+    />
 
     <a class="btn btn-icon"
       :class="iconClassObj"
@@ -23,7 +32,7 @@
 </template>
 
 <script setup>
-  import { reactive, computed } from 'vue'
+  import { ref, reactive, computed } from 'vue'
   import { useStore } from 'vuex'
   import textfield from '@/components/textfield.vue'
   import dropdown from '@/components/dropdown.vue'
@@ -37,6 +46,8 @@
     name: '',
     genre: null
   })
+
+  const isOverlayVisible = ref(false)
 
   const isIconsDisabled = computed(() => !search.name && !search.genre)
   const iconClassObj = computed(() => ({
@@ -55,9 +66,21 @@
       genre: search.genre?.key
     })
   }
+
+  function toggleOverlay(flag) {
+    isOverlayVisible.value = flag
+  }
 </script>
 
 <style lang="scss" scoped>
+.overlay {
+  background: #000;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: .5;
+}
+
 .search {
   @extend .grid-container;
   background: $bg-800;

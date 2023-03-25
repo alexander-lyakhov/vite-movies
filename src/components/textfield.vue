@@ -38,6 +38,7 @@
   display: flex;
   height: 3rem;
   padding: 0 .5rem;
+  z-index: 1;
 
   &.not-empty {
     border: 1px solid $accent-orange;
