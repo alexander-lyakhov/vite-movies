@@ -47,6 +47,22 @@ a {
   }
 }
 
+#app {
+  max-width: $page-width;
+  margin: auto;
+  padding: .75rem;
+  position: relative;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none;
+}
+
 .notification {
   color: #fff;
   border-radius: 6px;
@@ -68,18 +84,10 @@ a {
   }
 }
 
-#app {
-  max-width: $page-width;
-  margin: auto;
-  padding: .75rem;
-  position: relative;
-}
-
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari/Opera */
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE/Edge */
-  user-select: none;
+.warning {
+  font-size: 3rem;
+  color: $text-300;
+  background: $bg-800;
+  text-align: center;
+  padding: 1rem;
 }
