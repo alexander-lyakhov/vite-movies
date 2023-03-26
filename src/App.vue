@@ -9,19 +9,24 @@
       <router-link class="router-link" to="/">Movies</router-link>
       <router-link class="router-link" to="/sessions">Sessions</router-link>
     </nav>
+    <span class="btn btn-back" @click="router.go(-1)">
+      &larr; Back
+    </span>
   </header>
   
   <RouterView />
 </template>
 
 <script setup>
-  import { onMounted } from 'vue'
-  import { RouterLink, RouterView, useRoute } from 'vue-router'
-  const route = useRoute()
+  import { RouterLink, RouterView, useRouter } from 'vue-router'
+  const router = useRouter()
 </script>
 
 <style lang="scss" scoped>
 header {
+  display: flex;
+  align-items: center;
+  width: 100%;
   margin-bottom: .75rem;
 
   .nav {
@@ -38,6 +43,12 @@ header {
         border-bottom: 2px solid $accent-green;
       }
     }
+  }
+
+  .btn-back {
+    font-size: 1rem;
+    margin-left: auto;
+    padding: .5rem;
   }
 }
 </style>
