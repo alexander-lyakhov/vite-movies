@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import home from '@/views/home.vue'
-import info from '@/views/movie-info.vue'
-import sessions from '@/views/movie-sessions.vue'
+import movie from '@/views/movie'
+import movieInfo from '@/views/movie/info.vue'
+import movieSessions from '@/views/movie/sessions.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,25 +14,26 @@ const router = createRouter({
     },
     {
       path: '/sessions',
-      name: 'sessions',
+      name: 'all-sessions',
       component: () => import('@/views/sessions.vue')
     },
     {
       path: '/movie/:id',
       name: 'movie',
-      component: () => import('@/views/movie.vue'),
+      component: movie,
       redirect: {name: 'info'},
-      
       children: [
         {
           path: 'info',
           name: 'info',
-          component: info
+          component: movieInfo,
+          props: true
         },
         {
           path: 'sessions',
           name: 'sessions',
-          component: sessions
+          component: movieSessions,
+          props: true
         },
       ]
 

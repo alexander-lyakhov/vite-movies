@@ -6,8 +6,8 @@ export default createStore({
 
   state: () => ({
     movies: [],
-    filteredMovis: [],
-    sessions: [],
+    filteredMovies: [],
+    sessions: {},
     src: 'movies'
   }),
 
@@ -44,7 +44,7 @@ export default createStore({
 
     SET_FILTERED_MOVIES(state, data) {
       console.log('SET_FILTERED_MOVIES', data)
-      state.filteredMovis = data
+      state.filteredMovies = data
     },
 
 
@@ -67,14 +67,19 @@ export default createStore({
     async searchMovies({state, commit}, search) {
       const data = await api.searchMovies(search.name, search.genre)
       
-      commit('SET_SRC', 'filteredMovis')
+      commit('SET_SRC', 'filteredMovies')
       commit('SET_FILTERED_MOVIES', data)
     },
 
     async fetchSessions({state, commit, dispatch}) {
-      await dispatch('fetchMovies')
-      const data = await api.getSessions()
-      commit('SET_SESSIONS', data)
+      if (!state.sessions.length) {
+        await dispatch('fetchMovies')
+        commit('SET_SESSIONS', await api.getSessions())
+        return state.sessions
+      
+      } else {
+        return state.sessions
+      }
     },
 
     async getMovieById({state, getters}, id) {
