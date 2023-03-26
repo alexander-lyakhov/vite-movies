@@ -7,8 +7,8 @@
     />
     <div class="details">
       <div class="navigation">
-        <router-link to="info">Info</router-link>
-        <router-link to="sessions">Sessions</router-link>
+        <router-link class="router-link" to="info">Info</router-link>
+        <router-link class="router-link" to="sessions">Sessions</router-link>
       </div>
       <router-view />
     </div>
@@ -20,15 +20,12 @@
   import { useStore } from 'vuex'
   import { useRoute, useRouter, RouterView, RouterLink } from 'vue-router'
   import poster from '@/components/poster.vue'
-  // import { genres } from '@/utils/config.js'
 
   const store = useStore()
   const route = useRoute()
-  const router = useRouter()
 
   const id = route.params?.id
   const movie = ref({})
-  // const genre = ref(null)
 
   onMounted(async() => {
     movie.value = await store.dispatch('getMovieById', id)
@@ -48,32 +45,59 @@
     top: .75rem;
   }
 
-  .movie-info ul li {
-    display: flex;
-    line-height: 1.75;
-    padding: .5rem 0;
-    
-    &:not(:last-child) {
-      border-bottom: 1px solid $bg-500;
-    }
-    
-    .key {
-      min-width: 200px;
-    }
+  .navigation {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-gap: .5rem;
+    border: 2px solid transparent;
+    margin-bottom: 1.5rem;
 
-    .value {
-      display: 100%;
+    .router-link {
+      font-size: 1rem;
+      text-align: center;
+      display: block;
+      padding: .5rem;
+
+      &-exact-active {
+        border-bottom: 2px solid $accent-green;
+      }
+    }
+  }
+
+  .movie-info {
+    ul li {
+      display: flex;
+      line-height: 1.75;
+      padding: .5rem 0;
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid $bg-500;
+      }
+      
+      .key {
+        min-width: 200px;
+      }
+
+      .value {
+        display: 100%;
+      }
     }
   }
 }
 
 @media screen and (max-width: 640px) {
-  .movie-info {
-    dd li {
-      flex-direction: column;
+  .movie {
+    .navigation {
+      grid-template-columns: 1fr 1fr;
+    }
 
-      .key {
-        font-weight: bold;
+    .movie-info {
+      dd li {
+        flex-direction: column;
+
+        .key {
+          font-weight: bold;
+        }
       }
     }
   }
