@@ -1,5 +1,5 @@
 ﻿<template>
-    <h1 class="page-title">Movies</h1>
+  <h1 class="page-title">Movies</h1>
   <search-panel />
 
   <section class="movies" v-if="movies.length">
