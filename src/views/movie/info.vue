@@ -1,17 +1,17 @@
 ﻿<template>
   <div class="movie-info">
-    <dd>
+    <dl>
       <dt>Genre:</dt>
-      <dl>{{ genre }}</dl>
-    </dd>
-    <dd>
+      <dd>{{ genre }}</dd>
+    </dl>
+    <dl>
       <dt>Description:</dt>
-      <dl v-html="movie.description"></dl>
-    </dd>
-    <dd>
+      <dd v-html="movie.description" />
+    </dl>
+    <dl>
       <dt>Additionsl:</dt>
-      <dl v-html="movie.additional" />
-    </dd>
+      <dd v-html="movie.additional" />
+    </dl>
   </div>
 </template>
 
@@ -38,7 +38,7 @@
 <style lang="scss" scoped>
 
 .movie-info {
-  dd {
+  dl {
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: .5rem;
@@ -53,7 +53,7 @@
       padding: .75rem 0;
     }
 
-    dl {
+    dd {
       background: $bg-700;
       border-radius: 6px;
       padding: .75rem;
@@ -63,7 +63,7 @@
 
 @media screen and (max-width: 768px) {
   .movie-info {
-    dd {
+    dl {
       grid-template-columns: 1fr;
 
       dt {

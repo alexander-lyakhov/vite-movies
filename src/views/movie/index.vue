@@ -93,7 +93,7 @@
     }
 
     .movie-info {
-      dd li {
+      dl li {
         flex-direction: column;
 
         .key {
