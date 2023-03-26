@@ -5,6 +5,12 @@
       :image="movie.image"
       :title="movie.name"
     />
+    <div class="details">
+      <router-link to="info">Info</router-link>
+      <router-link to="sessions">Sessions</router-link>
+      <router-view />
+    </div>
+    <!--
     <div class="movie-info">
       <dd>
         <dt>Genre:</dt>
@@ -18,14 +24,14 @@
         <dt>Additionsl:</dt>
         <dl v-html="movie.additional" />
       </dd>
-    </div>
+    </div>-->
   </section>
 </template>
 
 <script setup>
   import { onMounted, ref, computed } from 'vue'
   import { useStore } from 'vuex'
-  import { useRoute } from 'vue-router'
+  import { useRoute, RouterView, RouterLink } from 'vue-router'
   import poster from '@/components/poster.vue'
   import { genres } from '@/utils/config.js'
 

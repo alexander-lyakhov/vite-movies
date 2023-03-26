@@ -30,7 +30,7 @@
   onMounted(() => store.dispatch('fetchMovies'))
 
   function showMovieInfo(id) {
-    router.push({name: 'info', params: {id}})
+    router.push({name: 'movie', params: {id}})
   }
 </script>
 
