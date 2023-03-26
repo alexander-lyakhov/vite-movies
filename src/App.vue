@@ -1,4 +1,5 @@
 <template>
+  <notifications />
   <header>
     <nav class="nav">
       <router-link class="router-link" to="/">Movies</router-link>
@@ -11,8 +12,16 @@
 </template>
 
 <script setup>
+  import { onMounted } from 'vue'
   import { RouterLink, RouterView, useRoute } from 'vue-router'
+  import { notify } from "@kyvg/vue3-notification";
   const route = useRoute()
+
+  onMounted(() => notify({
+    text: 'TEST',
+    position: 'top center',
+    type: 'error'
+  }))
 </script>
 
 <style lang="scss" scoped>
