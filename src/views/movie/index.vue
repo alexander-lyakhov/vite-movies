@@ -1,4 +1,5 @@
 ﻿<template>
+  <h1 class="page-title">Movie Details</h1>
   <section class="movie">
     <poster
       class="poster"

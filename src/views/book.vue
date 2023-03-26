@@ -1,4 +1,5 @@
 ﻿<template>
+  <h1 class="page-title">Book Tickets</h1>
   <section class="booking">
     <div class="movie-title" v-html="movie?.name"></div>
     <div class="movie-date">{{ new Date(showdate).toDateString() }}</div>

@@ -2,10 +2,11 @@
   <header>
     <nav class="nav">
       <router-link class="router-link" to="/">Movies</router-link>
-      <router-link class="router-link" to="/sessions">Sessions</router-link>
+      <router-link class="router-link" to="/sessions">All Sessions</router-link>
       <router-link class="router-link" to="/about">About</router-link>
     </nav>
   </header>
+  
   <RouterView />
 </template>
 

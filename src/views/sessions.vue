@@ -1,4 +1,5 @@
 ﻿<template>
+  <h1 class="page-title">All Sessions</h1>
   <section class="sessions">
     <div
       class="movie"
