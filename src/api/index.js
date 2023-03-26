@@ -14,7 +14,7 @@ async function getMovieById(id) {
     return data[0]
   }
   catch(e) {
-    return {}
+    throw e
   }
 }
 

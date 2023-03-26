@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { showError } from '@/utils'
 import api from '@/api';
 
 export default createStore({
@@ -58,25 +59,41 @@ export default createStore({
     async fetchMovies({state, commit}) {
       commit('SET_SRC', 'movies')
 
-      if (!state.movies.length) {
-        const data = await api.getMovies()
-        commit('SET_MOVIES', data)
+      try {
+        if (!state.movies.length) {
+          const data = await api.getMovies()
+          commit('SET_MOVIES', data)
+          return data
+        }
+      }
+      catch(e) {
+        showError(e)
       }
     },
 
     async searchMovies({state, commit}, search) {
-      const data = await api.searchMovies(search.name, search.genre)
-      
       commit('SET_SRC', 'filteredMovies')
-      commit('SET_FILTERED_MOVIES', data)
+
+      try {
+        const data = await api.searchMovies(search.name, search.genre)
+        commit('SET_FILTERED_MOVIES', data)
+        return data
+      }
+      catch(e) {
+        showError(e)
+      }
     },
 
     async fetchSessions({state, commit, dispatch}) {
       if (!state.sessions.length) {
-        await dispatch('fetchMovies')
-        commit('SET_SESSIONS', await api.getSessions())
-        return state.sessions
-      
+        try {
+          await dispatch('fetchMovies')
+          commit('SET_SESSIONS', await api.getSessions())
+          return state.sessions
+        }
+        catch(e) {
+          showError(e)
+        }
       } else {
         return state.sessions
       }
@@ -85,10 +102,18 @@ export default createStore({
     async getMovieById({state, getters}, id) {
       let movie = getters.getMovieById(id)
 
-      if (!movie) {
-        movie = await api.getMovieById(id)
+      if (movie) {
+        return movie
       }
-      return movie
+
+      try {
+        const movie = await api.getMovieById(id)
+        return movie
+      }
+      catch(e) {
+        showError(e)
+        return {}
+      }
     }
   }
 });

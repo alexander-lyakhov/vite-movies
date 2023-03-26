@@ -28,6 +28,7 @@
   import { onMounted, ref } from 'vue'
   import { useStore } from 'vuex'
   import { useRoute } from 'vue-router'
+  import { showError } from '@/utils'
   import rowContainer from '@/components/row-container.vue'
   import api from '@/api'
 
@@ -41,9 +42,13 @@
   const movie = ref({})
   
   onMounted(async() => {
-    // places.value = await api.getPlaces({id: 61, showdate: '2021-06-27', daytime: '10:50'})
-    places.value = await api.getPlaces(route.query)
-    movie.value = await store.dispatch('getMovieById', movie_id)
+    try {
+      places.value = await api.getPlaces(route.query)
+      movie.value = await store.dispatch('getMovieById', movie_id)
+    }
+    catch(e) {
+      showError(e)
+    }
   })
 
   function getRowNumber(item) {
@@ -68,7 +73,7 @@
       e.target.classList.add('is-booked')
     }
     catch(e) {
-      console.log(e.statusText)
+      showError(e)
     }
   }
 </script>
