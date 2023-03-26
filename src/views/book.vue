@@ -6,8 +6,8 @@
     <div class="movie-time">{{ daytime }}</div>
 
     <row-container
-      v-for="(item, iDate) in places"
-      :key="'${movie.id}_${iDate}'"
+      v-for="(item, index) in places"
+      :key="index"
       :title="`Row ${getRowNumber(item)}`"
       :items="getSeats(item)"
       :item-width="32"
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-  import { onMounted, computed, ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import { useStore } from 'vuex'
   import { useRoute } from 'vue-router'
   import rowContainer from '@/components/row-container.vue'
@@ -56,7 +56,7 @@
 
   async function bookTicket(e, row, seat) {
     try {
-      const res = await api.bookTicket({
+      await api.bookTicket({
         movie_id,
         row,
         seat,

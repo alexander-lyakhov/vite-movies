@@ -11,8 +11,6 @@
 </template>
 
 <script setup>
-  import { ref, reactive, computed } from 'vue'
-
   const props = defineProps({
     title: {
       type: String,
