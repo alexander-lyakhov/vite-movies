@@ -43,6 +43,7 @@
   
   .movie {
     background: $bg-800;
+    display: block;
     padding: .5rem;
 
     .poster {
