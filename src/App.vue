@@ -1,5 +1,7 @@
 <template>
-  <spinner v-model="isLoading" />
+  <teleport to="body">
+    <spinner v-model="flags.isLoading" />
+  </teleport>
   <notifications
     classes="notification"
     width="512px"
@@ -21,10 +23,10 @@
 <script setup>
   import { ref } from 'vue'
   import { RouterLink, RouterView, useRouter } from 'vue-router'
+  import { flags } from '@/utils'
   import spinner from '@/components/spinner'
 
   const router = useRouter()
-  const isLoading = ref(false)
 </script>
 
 <style lang="scss" scoped>
