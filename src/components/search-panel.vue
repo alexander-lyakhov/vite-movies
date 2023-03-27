@@ -5,11 +5,16 @@
   />
 
   <section class="search">
-    <textfield v-model.trim="search.name" />
+    <textfield
+      v-model.trim="search.name"
+      placeholder="Search by name"
+      @change="confirmSearch"
+    />
     
     <dropdown
       :items="genres"
       v-model="search.genre"
+      @change="confirmSearch"
       @toggle="toggleOverlay"
     />
 
@@ -20,6 +25,7 @@
     >
       <IconReset />
     </a>
+
     <a
       class="btn btn-icon"
       :class="iconClassObj"

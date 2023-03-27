@@ -2,8 +2,10 @@
   <div class="text-field" :class="classObject">
     <input
       type="text"
+      :placeholder="placeholder"
       :value="modelValue" 
       @input="onInput"
+      @keypress="onKeypress"
     />
   </div>
 </template>
@@ -12,6 +14,10 @@
   import { computed } from 'vue'
 
   const props = defineProps({
+    placeholder: {
+      type: String,
+      default: ''
+    },
     modelValue: {
       type: String,
       default: ''
@@ -19,7 +25,8 @@
   })
 
   const emit = defineEmits([
-    'update:modelValue'
+    'update:modelValue',
+    'change'
   ])
 
   const classObject = computed(() => ({
@@ -28,6 +35,13 @@
 
   function onInput(e) {
     emit('update:modelValue', e.target.value)
+  }
+
+  function onKeypress(e) {
+    if (e.keyCode === 13) {
+      onInput(e)
+      emit('change', e.target.value)
+    }
   }
 </script>
 

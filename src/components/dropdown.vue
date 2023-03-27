@@ -44,8 +44,7 @@
 
   const emit = defineEmits([
     'update:modelValue',
-    'expand',
-    'collapse',
+    'change',
     'toggle'
   ])
 
@@ -64,6 +63,7 @@
   function select(item) {
     isOpen.value = false;
     emit('update:modelValue', item)
+    emit('change', item)
     emit('toggle', isOpen.value)
   }
 </script>
