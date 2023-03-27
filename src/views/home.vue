@@ -2,7 +2,7 @@
   <h1 class="page-title">Movies</h1>
   <search-panel />
 
-  <section class="movies" v-if="movies.length">
+  <section class="movies">
     <div
       class="movie"
       v-for="item in movies"
@@ -15,10 +15,6 @@
       />
     </div>
   </section>
-  <div class="warning" v-else>
-    No movies found
-  </div>
-
 </template>
 
 <script setup>
@@ -47,6 +43,7 @@
   
   .movie {
     background: $bg-800;
+    display: block;
     padding: .5rem;
 
     .poster {

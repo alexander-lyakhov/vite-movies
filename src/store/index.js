@@ -39,18 +39,15 @@ export default createStore({
     },
 
     SET_MOVIES(state, data) {
-      console.log('SET_MOVIES', data)
       state.movies = data
     },
 
     SET_FILTERED_MOVIES(state, data) {
-      console.log('SET_FILTERED_MOVIES', data)
       state.filteredMovies = data
     },
 
 
     SET_SESSIONS(state, data) {
-      console.log('SET_SESSIONS', data)
       state.sessions = data
     }
   },
