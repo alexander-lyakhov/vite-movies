@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-  import { watch } from 'vue'
+  import { watchEffect } from 'vue'
 
   const props = defineProps({
     modelValue: {
@@ -14,6 +14,10 @@
       default: true
     }
   })
+
+  watchEffect(() =>
+    document.body.style.overflow = props.modelValue ? 'hidden':'auto'
+  )
 </script>
 
 <style lang="scss" scoped>
