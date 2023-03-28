@@ -4,16 +4,19 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import svgLoader from 'vite-svg-loader'
-import { configEnv, loadEnv } from 'vite'
+// import { configEnv, loadEnv } from 'vite'
 
 export default function (configEnv) {
+  /*
   process.env = {
     ...process.env,
     ...loadEnv(configEnv.mode, process.cwd(), '')
   }
+  */
 
   return defineConfig({
-    base: process.env.VITE_APP_BASE_URL,
+    // base: process.env.VITE_APP_BASE_URL,
+    base: process.env.NODE_ENV === 'production' ? '/vite-movies/' : '/',
     plugins: [vue(), vueJsx(), svgLoader()],
 
     resolve: {
