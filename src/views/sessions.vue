@@ -1,6 +1,14 @@
 ﻿<template>
   <h1 class="page-title">All Sessions</h1>
   <section class="sessions">
+    <div class="menu">
+      <ul class="menu-body">
+        <li class="menu-item">Spirit</li>
+        <li class="menu-item">Spirit</li>
+        <li class="menu-item">Spirit</li>
+        <li class="menu-item">Spirit</li>
+      </ul>
+    </div>
     <div
       class="movie"
       v-for="movie in sessions"
@@ -57,6 +65,28 @@
 <style lang="scss" scope>
 .sessions {
   @extend .grid-container;
+  grid-template-columns: 200px 1fr;
+
+  .menu {
+    // position: fixed;
+    background: #088;
+
+    &-body {
+      background: $bg-600;
+      padding: 4px;
+      // align-self: start;
+    }
+
+    &-item {
+      background: $bg-800;
+      padding: .75rem .5rem;
+      cursor: pointer;
+  
+      &:not(:last-child) {
+        margin: 0 0 1px;
+      }
+    }
+  }
 
   .movie {
     @extend .grid-container;

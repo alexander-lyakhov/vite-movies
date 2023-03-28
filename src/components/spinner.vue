@@ -15,9 +15,11 @@
     }
   })
 
+  /*
   watchEffect(() =>
     document.body.style.overflow = props.modelValue ? 'hidden':'auto'
   )
+  */
 </script>
 
 <style lang="scss" scoped>
