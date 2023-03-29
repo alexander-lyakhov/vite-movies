@@ -59,6 +59,7 @@ export default createStore({
       try {
         if (!state.movies.length) {
           const data = await api.getMovies()
+          data.sort((a, b) => a.id - b.id)
           commit('SET_MOVIES', data)
           return data
         }
@@ -73,6 +74,7 @@ export default createStore({
 
       try {
         const data = await api.searchMovies(search.name, search.genre)
+        data.sort((a, b) => a.id - b.id)
         commit('SET_FILTERED_MOVIES', data)
         return data
       }
