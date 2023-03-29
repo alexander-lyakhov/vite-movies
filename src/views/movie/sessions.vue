@@ -39,14 +39,15 @@
 <style lang="scss" scoped>
 .movie-sessions {
   .time {
-    background: $bg-800;
+    color: #000;
+    background: $bg-100;
     text-align: center;
     padding: .5rem 0;
     cursor: pointer;
     
     &:hover {
       color: #000;
-      background: $bg-100;
+      background: #fff;
     }
   }
 }
