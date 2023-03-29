@@ -15,11 +15,12 @@
     }
   })
 
-  /*
-  watchEffect(() =>
-    document.body.style.overflow = props.modelValue ? 'hidden':'auto'
-  )
-  */
+  
+  watchEffect(() => {
+    document.documentElement.style.height = props.modelValue ? '100vh':'auto'
+    document.documentElement.style.overflow = props.modelValue ? 'hidden':''
+  })
+  
 </script>
 
 <style lang="scss" scoped>
