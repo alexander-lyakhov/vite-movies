@@ -73,7 +73,11 @@ export default createStore({
       commit('SET_SRC', 'filteredMovies')
 
       try {
-        const data = await api.searchMovies(search.name, search.genre)
+        let data = await api.searchMovies(search.name, search.genre)
+        
+        if (search.genre != undefined) {
+          data = data.filter(el => el.genre == search.genre)
+        }
         data.sort((a, b) => a.id - b.id)
         commit('SET_FILTERED_MOVIES', data)
         return data
