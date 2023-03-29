@@ -56,12 +56,23 @@
   }))
 
   function toggle() {
-    isOpen.value = !isOpen.value
-    emit('toggle', isOpen.value)
+    !isOpen.value ? open() : close()
+  }
+
+  function open() {
+    document.body.addEventListener('click', close)
+    isOpen.value = true;
+    emit('toggle', true)
+  }
+
+  function close() {
+    document.body.removeEventListener('click', close)
+    isOpen.value = false;
+    emit('toggle', false)
   }
 
   function select(item) {
-    isOpen.value = false;
+    close()
     emit('update:modelValue', item)
     emit('change', item)
     emit('toggle', isOpen.value)
