@@ -1,8 +1,5 @@
 ﻿<template>
-  <div
-    class="overlay"
-    v-show="isOverlayVisible"
-  />
+  <overlay :is-visible="isOverlayVisible" />
 
   <section class="search">
     <textfield
@@ -42,6 +39,7 @@
   import { useStore } from 'vuex'
   import textfield from '@/components/textfield.vue'
   import dropdown from '@/components/dropdown.vue'
+  import overlay from '@/components/modal/overlay.vue'
   import IconConvirm from '@/assets/icons/checkmark-outline.svg'
   import IconReset from '@/assets/icons/close-outline.svg'
   import { genres } from '@/utils/config.js'
@@ -79,14 +77,6 @@
 </script>
 
 <style lang="scss" scoped>
-.overlay {
-  background: #000;
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  opacity: .5;
-}
-
 .search {
   @extend .grid-container;
   background: $bg-800;
