@@ -24,7 +24,7 @@
   import { ref } from 'vue'
   import { RouterLink, RouterView, useRouter } from 'vue-router'
   import { flags } from '@/utils'
-  import spinner from '@/components/spinner'
+  import spinner from '@/components/modal/spinner'
 
   const router = useRouter()
 </script>
