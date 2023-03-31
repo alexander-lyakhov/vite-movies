@@ -87,4 +87,13 @@
 
   }
 }
+@media screen and (max-width: 512px) {
+  .sessions .movie {
+    grid-template-columns: 1fr;
+
+    .poster {
+      position: relative;
+    }
+  }
+}
 </style>
