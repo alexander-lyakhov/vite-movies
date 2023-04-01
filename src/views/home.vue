@@ -21,7 +21,7 @@
   import { onMounted, computed } from 'vue'
   import { useStore } from 'vuex'
   import { useRouter } from 'vue-router'
-  import poster from '@/components/poster.vue'
+  import poster from '@/components/movie-poster.vue'
   import searchPanel from '@/components/search-panel.vue'
 
   const store  = useStore()

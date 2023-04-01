@@ -20,7 +20,7 @@
   import { onMounted, ref } from 'vue'
   import { useStore } from 'vuex'
   import { useRoute, RouterView, RouterLink } from 'vue-router'
-  import poster from '@/components/poster.vue'
+  import poster from '@/components/movie-poster.vue'
 
   const store = useStore()
   const route = useRoute()

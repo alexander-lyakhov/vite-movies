@@ -36,7 +36,7 @@
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
-  import poster from '@/components/poster.vue'
+  import poster from '@/components/movie-poster.vue'
   import rowContainer from '@/components/row-container.vue'
 
   const store = useStore()
