@@ -10,6 +10,7 @@
       <div
         class="time"
         @click="$emit('pickTime', {
+          id: movieId,
           showdate: session.showdate,
           daytime: time
         })"
@@ -24,6 +25,10 @@
   import rowContainer from '@/components/row-container.vue'
 
   defineProps({
+    movieId: {
+      type: Number,
+      required: true
+    },
     sessions: {
       type: Array,
       default: () => ([]),

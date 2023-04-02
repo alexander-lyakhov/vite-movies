@@ -11,7 +11,14 @@
         :title="movie.name"
         @click="showMovieInfo(movie.id)"
       />
+        
+          <movie-sessions
+            :movie-id="movie.id"
+            :sessions="movie.sessions"
+            @pickTime=bookTickets
+          />
 
+      <!--
       <div class="session-wrapper">
         <row-container
           v-for="(session, iDate) in movie.sessions"
@@ -27,7 +34,7 @@
             {{ time }}
           </div>
         </row-container>
-      </div>
+      </div>-->
     </div>
   </section>
 </template>
@@ -37,7 +44,8 @@
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
   import poster from '@/components/movie-poster.vue'
-  import rowContainer from '@/components/row-container.vue'
+  import movieSessions from '@/components/movie-sessions.vue'
+  // import rowContainer from '@/components/row-container.vue'
 
   const store = useStore()
   const router = useRouter()
@@ -50,6 +58,7 @@
   }
 
   function bookTickets(id, showdate, daytime) {
+    console.log('---> bookTickets'. id)
     router.push({name: 'book', query: {id, showdate, daytime}})
   }
 </script>
