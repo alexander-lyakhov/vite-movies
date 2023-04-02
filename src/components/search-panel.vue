@@ -96,7 +96,7 @@
   }	
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .search {
     grid-template-columns: 1fr 1fr;
     justify-items: center;

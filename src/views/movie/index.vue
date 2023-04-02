@@ -106,10 +106,13 @@
 
 @media screen and (max-width: 512px) {
   .movie {
+    // background: none;
     grid-template-columns: 1fr;
+    // padding: 0;
 
     .poster {
       position: relative;
+      width: 100%;
     }
   }
 }
