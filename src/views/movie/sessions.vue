@@ -1,5 +1,6 @@
 ﻿<template>
   <movie-sessions
+    :movie-id="+id"
     :sessions="sessions"
     @pickTime=bookTickets
   />
@@ -19,7 +20,7 @@
   store.dispatch('fetchSessions')
   const sessions = computed(() => store.state.sessions[id])
 
-  function bookTickets({showdate, daytime}) {
+  function bookTickets({id, showdate, daytime}) {
     router.push({name: 'book', query: {id, showdate, daytime}})
   }
 </script>
