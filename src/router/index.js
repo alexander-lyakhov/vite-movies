@@ -1,11 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory  } from 'vue-router'
 import home from '@/views/home.vue'
 import movie from '@/views/movie'
 import movieInfo from '@/views/movie/info.vue'
 import movieSessions from '@/views/movie/sessions.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
