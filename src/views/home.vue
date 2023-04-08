@@ -39,7 +39,7 @@
 .movies	{
   @extend .grid-container;
   grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
-  padding: 0y;
+  padding: 0;
   
   .movie {
     background: $bg-800;
